@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.4.0/Rx.js"></script>
+        <!--
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.5.7/rxjs.umd.js" ></script>
+            -->
+
+    </head>
+
+    <body>
+
+        this is indexed db test 
+
+        Enter a line to be saved to db:
+        <br />
+        <input type="text" id="line" name="line" />
+        <input type="submit" value="Submit" id="button" /> 
+        <br><br>
+
+        <ul id='results'>
+
+        </ul> 
+        <script  src="./db.js"></script>
+
+        <script>
+
+            let counter = 0;
+
+            const lineInput = document.querySelector('input#line');
+            const submitBtn = document.querySelector('#button');
+
+            submitBtn.addEventListener('click', () => {
+                            counter++ ;
+                            add({ id: Date.now(),
+                                data: counter + ' ' + lineInput.value
+                                    }).subscribe( 
+                                                    res => console.log('item added', res),
+                                                    error => console.log(error), 
+                                                    () => console.log('completed') );
+                        } )
+
+
+        </script>
+    </body>
+</html>
