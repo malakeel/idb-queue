@@ -6,7 +6,7 @@ The obivious solutions is to use observables to queue the payloads, and this wil
 
 The challenge was to have a feedback mechanism to the observable, to let it know that the subscriber is ready for more and may be I need more understanding of the observalbe push mechanism. 
 
-The work around this, was to use higher-order observable to provide stream of inner observables. Data are loaded from the DB only when the inner observable is consumed/subscribed to. This way I can ensure there's no empty events are emmited (when no records are avaialbe), and prevent records from being pushed at once.
+The work around this, was to use higher-order observable to provide stream of inner observables. Data are loaded from the DB only when the inner observable is consumed/subscribed to. This way I can ensure there's no empty events are emmited (when no records are avaialbe), and prevent records from being pushed at once. Additionally, looping over the existing records and poping each one means holding a read-write transaction. Since indexedDB is a allows one transaction at a time, this will block the other side (UI) from producing records.
 
 RxJS operators for back-pressure (buffer, bufferCount .. etc) may of may not have worked.
 
