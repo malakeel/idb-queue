@@ -1,7 +1,3 @@
-//import 'rxjs';
-
-//import { range, filter, map } from 'rxjs';
-
 const {AsyncSubject, Observable, Subject, fromEvent, of, merge } = rxjs;
 const {tap, filter, map, takeWhile, take,concatMap, switchMap, mergeMap, flatMap, bufferCount,
     groupBy,
@@ -50,7 +46,6 @@ DBOpenRequest.onupgradeneeded = (e) => {
 DBOpenRequest.onsuccess = (event) => {
     console.log('db opened');
     db = DBOpenRequest.result;
-
 
     let transaction = db.transaction([store_name], "readwrite");
 
